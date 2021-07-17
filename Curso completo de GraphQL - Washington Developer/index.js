@@ -81,3 +81,43 @@ const resolvers = {
 const server = new ApolloServer({typeDefs, resolvers})
 
 server.listen().then(({url}) => console.log(`${url}`))
+
+
+/* 
+Pesquisa
+
+//Sem fragment
+query{
+    usuarios{
+        id nome idade salario ativo perfil{
+            id descricao
+        }
+    }
+}
+
+//O Fragment tem que ficar fora da query principal
+fragment usuarioCompleto on Usuarios{
+    id nome idade salario ativo perfil{
+        id descricao
+    }
+}
+
+//Com fragment
+query{
+    usuarios{
+        ...usuarioCompleto
+        // retorma os atributos passados no fragment
+    }
+}
+
+//Alias
+
+usuarioUm: usuario(id: 1){
+    ...usuarioCompleto
+}
+
+usuarioDois: usuario(id: 2){
+    ...usuarioCompleto
+}
+
+*/
