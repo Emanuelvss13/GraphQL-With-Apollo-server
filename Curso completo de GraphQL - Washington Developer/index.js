@@ -6,47 +6,43 @@ const usuarios = [
         nome: "Emanuel",
         idade: 19,
         salario: 1500,
-        ativo: true
+        ativo: true,
+        perfil: 2
     },
     {
         id: 2,
         nome: "Ana",
         idade: 17,
         salario: 500,
-        ativo: true
+        ativo: true,
+        perfil: 2
     },
     {
         id: 3,
         nome: "Maria",
         idade: 32,
         salario: 5500,
-        ativo: true
+        ativo: true,
+        perfil: 1
     },
 ]
 
-const produtos = [
+const perfis = [
     {
         id: 1,
-        nome: "Notebook",
-        valor: 3500
+        descricao: "Admin",
     },
     {
         id: 2,
-        nome: "Celular",
-        valor: 2000
-    },
-    {
-        id: 3,
-        nome: "M711",
-        valor: 150
+        descricao: "Normal",
     },
 ]
 
 const typeDefs = gql`
-    type Produtos{
+
+    type Perfis{
         id: ID!
-        nome: String!
-        valor: Int!
+        descricao: String!
     }
 
     type Usuarios{
@@ -55,18 +51,22 @@ const typeDefs = gql`
         idade: Int!
         salario: Int!
         ativo: Boolean!
+        perfil: Perfis!
     }
 
     type Query{
         usuarios: [Usuarios]!
         usuario(id: Int, nome: String): Usuarios
-
-        produtos: [Produtos]!
-        produto(id: Int, nome: String): Produtos
+        perfis: [Perfis]!
     }
 `
 
 const resolvers = {
+    Usuarios: {
+        perfil: (usuario) => perfis.find(perfil => perfil.id === usuario.perfil)
+    },
+
+
     Query: {
         usuarios: () => usuarios,
         usuario: (_, { id, nome }) => {
@@ -74,13 +74,7 @@ const resolvers = {
 
             return usuarios.find(usuario => usuario.nome === nome)
         },
-
-        produtos: () => produtos,
-        produto: (_, {id, nome}) => {
-            if(id) return produtos.find(produto => produto.id === id)
-
-            return produtos.find(produto => produto.nome.toLowerCase() === nome.toLowerCase())
-        }
+        perfis: () => perfis
     }
 }
 
