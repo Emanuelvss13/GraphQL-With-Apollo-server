@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon -ext js,gql"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^3.0.1",
-    "graphql": "^15.5.1"
+    "graphql": "^15.5.1",
+    "graphql-tools": "^7.0.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
