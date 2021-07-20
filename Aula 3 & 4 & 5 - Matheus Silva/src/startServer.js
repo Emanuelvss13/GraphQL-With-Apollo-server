@@ -3,7 +3,7 @@ import { PubSub } from 'graphql-subscriptions'
 import mongoose from 'mongoose'
 
 function startServer({typeDefs, resolvers}){
-    mongoose.connect('mongodb+srv://emanuel:desconhecido94@cluster0.b0aoq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+    mongoose.connect('mongodb+srv://youruser:yourpassword@cluster0.b0aoq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(console.log('mongoose connected...'))
